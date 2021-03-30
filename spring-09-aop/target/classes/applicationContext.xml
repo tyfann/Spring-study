@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="com.tyfann.service.UserServiceImpl"/>
+    <bean id="beforeLog" class="com.tyfann.log.BeforeLog"/>
+    <bean id="afterLog" class="com.tyfann.log.AfterLog"/>
+
+    <bean id="annotationPointCut" class="com.tyfann.diy.AnnotationPointCut"/>
+
+    <aop:aspectj-autoproxy/>
+
+    <!--方式一：使用原生的Spring API接口-->
+    <!--配置aop：需要导入aop的约束-->
+    <!--<aop:config>-->
+    <!--    <aop:pointcut id="pointcut1" expression="execution(* com.tyfann.service.UserServiceImpl.*(..))"/>-->
+
+    <!--    <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut1"/>-->
+    <!--    <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut1"/>-->
+    <!--</aop:config>-->
+
+    <!--方式二：自定义类-->
+    <!--<bean id="diy" class="com.tyfann.diy.DiyPointCut"/>-->
+
+    <!--<aop:config>-->
+    <!--    <aop:aspect ref="diy">-->
+    <!--        <aop:pointcut id="pointcut2" expression="execution(* com.tyfann.service.UserServiceImpl.*(..))"/>-->
+    <!--        <aop:before method="before" pointcut-ref="pointcut2"/>-->
+    <!--        <aop:after method="after" pointcut-ref="pointcut2"/>-->
+    <!--    </aop:aspect>-->
+    <!--</aop:config>-->
+
+
+</beans>
